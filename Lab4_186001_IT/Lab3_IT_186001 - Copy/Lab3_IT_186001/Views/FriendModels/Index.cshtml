@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Lab3_IT_186001.Models.FriendModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="tabelaFriends">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MestoZiveenje)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MestoZiveenje)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    <button id="@item.Id" class="btn btn-default js-delete">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var table=$("#tabelaFriends").DataTable();
+            $("#tabelaFriends .js-delete").on("click", function () {
+                var kopce = $(this);
+                bootbox.confirm("Dali ste sigurni deka sakate da ja izbrisete stavkata?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/FriendModels/Delete/"+kopce.attr("id"),
+                            method: "GET",
+                            success: function () {
+                                table.row(kopce.parents("tr")).remove().draw();
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        })
+                    }
+                })
+
+            });
+        });
+
+    </script>
+   
+    }

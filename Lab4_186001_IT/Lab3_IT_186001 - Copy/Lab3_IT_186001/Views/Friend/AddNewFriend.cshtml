@@ -1,0 +1,33 @@
+﻿@model Lab3_IT_186001.Models.FriendModel
+
+@{
+    ViewBag.Title = "AddNewFriend";
+}
+
+<h2>Dodaj nov Friend</h2>
+
+@using (Html.BeginForm("AddNewFriend", "Friend"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Id)
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Id)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.MestoZiveenje)
+        @Html.TextBoxFor(m => m.MestoZiveenje, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.MestoZiveenje)
+    </div>
+
+    <button type="submit">Submit</button>
+    <input type="button" value="Back" onclick="location.href='@Url.Action("Prikaz","Friend")'"/>
+ 
+
+}

@@ -1,0 +1,30 @@
+﻿@model List<Lab3_IT_186001.Models.FriendModel>
+@{
+    ViewBag.Title = "Prikaz";
+}
+
+<h2>Prikaz na site prijateli</h2>
+
+<table>
+    <tr>
+        <td style="border: 1px solid black;padding: 10px;">Friend ID</td>
+        <td style="border: 1px solid black;padding: 10px;">Friend Name</td>
+        <td style="border: 1px solid black;padding: 10px;">Place</td>
+        <td style="border: 1px solid black;padding: 10px;"></td>
+    </tr>
+    @{
+        foreach (var friend in Model)
+        {
+        <tr>
+            <td style="border:1px solid black;padding:10px">@friend.Id</td>
+            <td style="border:1px solid black;padding:10px">@friend.Name</td>
+            <td style="border:1px solid black;padding:10px">@friend.MestoZiveenje</td>
+            <td style="border:1px solid black;padding:10px">
+                <input type="button" value="Edit" onclick="location.href='@Url.Action("EditFriend","Friend",new {id=friend.Id })'" />
+                <input type="button" value="Delete" onclick="location.href='@Url.Action("DeleteFriend","Friend",new { id=friend.Id})'" />
+              </td>
+        </tr>
+        }
+
+    }
+</table>
